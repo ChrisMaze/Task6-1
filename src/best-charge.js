@@ -2,7 +2,6 @@ var amount = [];
 var itemId = [];
 var price = [];
 var result = 0;
-var discount = 0;
 var nameAll = [];
 var nameDis = [];
 
@@ -47,7 +46,7 @@ function totalPri(){
     }
   }
 }
-function discCmp() {
+function discCmp(discount) {
   var k = 0;
   for(var i=0;i<itemId.length;i++)
   {
@@ -55,7 +54,7 @@ function discCmp() {
     {
       if(itemId[i]==loadPromotions()[1].items[j])
       {
-          discount +=price[i]/2;
+          discount +=price[i]/2*amount[i];
           nameDis[k++] = nameAll[i];
       }
     }
@@ -64,16 +63,17 @@ function discCmp() {
   {
     discount = 6;
   }
-
+  return discount;
 }
 function bestCharge(inputs) {
+  var discount = 0;
   var outputs = '============= 订餐明细 =============\n';
   var supplement = '';
   var orderingMeals = toBeArr(inputs);
   console.log(orderingMeals);
   findInfo(orderingMeals);
   totalPri();
-  discCmp();
+  discount = discCmp(discount);
   console.log(discount);
   if(discount == 6&&result>=30)
   {
@@ -99,7 +99,12 @@ function bestCharge(inputs) {
     outputs += nameAll[i]+' x '+amount[i]+' = '+amount[i]*price[i]+'元\n';
   }
   outputs += '-----------------------------------\n'+supplement+'总计：'+result+'元\n===================================';
-
+  amount = [];
+  itemId = [];
+  price = [];
+  result = 0;
+  nameAll = [];
+  nameDis = [];
 
   return outputs.trim();
 }

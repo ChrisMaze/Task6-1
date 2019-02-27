@@ -1,6 +1,6 @@
 
 #message {
-	height: 80px;
+	height: auto;
 	line-height: 30px;
 	border: 1px solid red;
 }
