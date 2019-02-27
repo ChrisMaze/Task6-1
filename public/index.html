@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="">
+<head>
+    <meta charset="UTF-8">
+    <title>Take Out Food</title>
+
+    <link rel="stylesheet" href="./index.css" />
+    <script type="text/javascript" src="../src/items.js"></script>
+    <script type="text/javascript" src="../src/promotions.js"></script>
+    <script type="text/javascript" src="../src/best-charge.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+</head>
+<body>
+    <h1>“好多肉”在线点餐系统</h1>
+    <div id="items" ></div>
+    <div id="promotions"></div>
+    <div>
+        <button onclick="calculatePrice()">结算</button>
+        <button onclick="clear()">清除</button>
+    </div>
+    <pre id="message">
+        /* 请将结算后产生的汇总字符串显示在这里 */
+    </pre>
+    <script>
+        var listItems="";
+        var promotionItem ="";
+        for(var j=0; j<loadPromotions()[1].items.length; j++)
+        {
+            for(var i=0;i<loadAllItems().length;i++)
+            {
+                listItems+="<span id='menu'>"+ loadAllItems()[i].name+"</span>" +
+                    "<span id='menu'>"+loadAllItems()[i].price+ "元</span>" +
+                    "<span id='menu'><input type=\"text\" name=’‘ id=\""  +
+                    loadAllItems()[i].id+
+                    "\"placeholder='请输入数量' oninput=\"value=value.replace(/[^\\d]/g,'')\"></span><br>";
+
+                if(loadAllItems()[i].id == loadPromotions()[1].items[j])
+                {
+                    promotionItem += loadAllItems()[i].name+"&nbsp;";
+                }
+            }
+            if(j==0)
+            {
+                document.getElementById("items").innerHTML = "=============菜单=============<br>" +
+                    "<span id='menu'>菜品</span><span id='menu'>单价</span><span id='menu'>数量</span><br>"+listItems;
+            }
+        }
+
+
+        document.getElementById("promotions").innerHTML = "--------------------优惠信息----------------------<br><span id='menu_1'>1." +
+            loadPromotions()[0].type+"</span><br><span id='menu_1'>2."+loadPromotions()[1].type+":"+promotionItem+"</span><br><br>";
+    </script>
+</body>
+</html>

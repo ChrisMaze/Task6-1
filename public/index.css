@@ -1,0 +1,22 @@
+
+#message {
+	height: 80px;
+	line-height: 30px;
+	border: 1px solid red;
+}
+#menu{
+	display: inline-block;
+	width:70px;
+	padding-left:18px;
+	padding-top: 5px;
+	padding-bottom:5px;
+	font-size:15px;
+}
+#menu_1{
+	display: inline-block;
+	width:500px;
+	padding-left:18px;
+	padding-top: 5px;
+	padding-bottom:5px;
+	font-size:15px;
+}
